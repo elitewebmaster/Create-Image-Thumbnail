@@ -1,0 +1,17 @@
+{
+  "name": "image-thumbnail",
+  "version": "1.0.0",
+  "description": "Image thumbnail generator",
+  "keywords": [
+    "aws",
+    "sharp",
+    "thumbnail"
+  ],
+  "author": "https://elitewebmaster.com",
+  "license": "MIT",
+  "main": "index.js",
+  "dependencies": {
+    "sharp": "^0.17.3",
+    "aws-sdk": "^2.36.0"
+  }
+}
