@@ -1,7 +1,7 @@
 
 # Create Image Thumbnail
 
-Create Image Thumbnail using AWS Lambda and upload to AWS S3.
+Create Image Thumbnail in AWS Lambda and upload to AWS S3.
 
 
 ## Authors
