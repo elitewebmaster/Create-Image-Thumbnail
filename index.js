@@ -1,6 +1,6 @@
 'use strict';
 
-var AWS = require('aws-sdk'),
+const AWS = require('aws-sdk'),
     Sharp = require('sharp'),
     S3 = new AWS.S3();
 
@@ -19,9 +19,8 @@ exports.handler = function(event, context, callback) {
   S3.getObject({Bucket: bucket, Key: key}).promise()
     .then(data => Sharp(data.Body).metadata()
       .then(info => {
-        var calcDimension = calculateAspectRatioFit(info.width, info.height);
-        console.log(info);
-        console.log(calcDimension);
+        const calcDimension = calculateAspectRatioFit(info.width, info.height);
+
         Sharp(data.Body).resize(calcDimension.width, calcDimension.height).toBuffer()
         .then(buffer => S3.putObject({
           ACL: process.env.S3_BUCKET_ACL,
