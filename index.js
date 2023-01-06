@@ -14,9 +14,7 @@ function calculateAspectRatioFit(srcWidth, srcHeight, maxWidth = 122, maxHeight 
 
 exports.handler = function(event, context, callback) {
   var key = decodeURIComponent(event.Records[0].s3.object.key), 
-      bucket = event.Records[0].s3.bucket.name;
-
-  console.log("key: " + key);
+      bucket = process.env.S3_BUCKET_NAME;
 
   S3.getObject({Bucket: bucket, Key: key}).promise()
     .then(data => Sharp(data.Body).metadata()
@@ -26,7 +24,7 @@ exports.handler = function(event, context, callback) {
         console.log(calcDimension);
         Sharp(data.Body).resize(calcDimension.width, calcDimension.height).toBuffer()
         .then(buffer => S3.putObject({
-          ACL: 'public-read',
+          ACL: process.env.S3_BUCKET_ACL,
           Body: buffer,
           Bucket: bucket,
           ContentType: 'image/' + info.format,
